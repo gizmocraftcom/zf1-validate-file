@@ -56,7 +56,7 @@ class Zend_Validate_File_ExcludeExtension extends Zend_Validate_File_Extension
     public function isValid($value, $file = null)
     {
         // Is file readable ?
-        if (!Zend_Loader::isReadable($value)) {
+        if (strpos((string) $value, "\0") !== false || !Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

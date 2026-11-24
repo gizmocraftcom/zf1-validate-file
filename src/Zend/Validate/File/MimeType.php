@@ -76,7 +76,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
     /**
      * Finfo object to use
      *
-     * @var resource|null
+     * @var finfo|null
      */
     protected $_finfo;
 
@@ -177,7 +177,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         } elseif (!(class_exists('finfo', false))) {
             $this->_magicfile = null;
             throw new Zend_Validate_Exception('Magicfile can not be set. There is no finfo extension installed');
-        } elseif (!is_file($file) || !is_readable($file)) {
+        } elseif (strpos((string) $file, "\0") !== false || !is_file($file) || !is_readable($file)) {
             throw new Zend_Validate_Exception('The given magicfile can not be read');
         } else {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
@@ -340,7 +340,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         }
 
         // Is file readable ?
-        if (!Zend_Loader::isReadable($value)) {
+        if (strpos((string) $value, "\0") !== false || !Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_READABLE);
         }
 

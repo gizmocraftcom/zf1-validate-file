@@ -107,7 +107,7 @@ class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
         $size = $this->_getSize();
         foreach ($value as $files) {
             // Is file readable ?
-            if (!Zend_Loader::isReadable($files)) {
+            if (strpos((string) $files, "\0") !== false || !Zend_Loader::isReadable($files)) {
                 $this->_throw($file, self::NOT_READABLE);
                 continue;
             }

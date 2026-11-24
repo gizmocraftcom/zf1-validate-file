@@ -22,5 +22,3 @@ parameters:
             message: "#^PHPDoc type string of property Zend_Validate_File_Sha1\\:\\:\\$_hash is not covariant with PHPDoc type array\\|null of overridden property Zend_Validate_File_Hash\\:\\:\\$_hash\\.$#"
             count: 1
             path: src/Zend/Validate/File/Sha1.php
-includes:
-    - phpstan-php81+.php

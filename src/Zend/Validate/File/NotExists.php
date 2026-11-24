@@ -65,7 +65,9 @@ class Zend_Validate_File_NotExists extends Zend_Validate_File_Exists
             }
 
             $check = true;
-            if (file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
+            $path  = $directory . DIRECTORY_SEPARATOR . $file['name'];
+            // PHP 8.6 throws a ValueError for paths containing NUL bytes (such a path cannot exist)
+            if (strpos($path, "\0") === false && file_exists($path)) {
                 return $this->_throw($file, self::DOES_EXIST);
             }
         }
