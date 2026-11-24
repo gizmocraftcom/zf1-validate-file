@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +29,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
  */
+#[Group('Zend_Validate')]
 class Zend_Validate_File_FilesSizeTest extends PHPUnit\Framework\TestCase
 {
     protected $multipleOptionsDetected;
@@ -167,9 +169,7 @@ class Zend_Validate_File_FilesSizeTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('976.56kB', $validator->getMax());
     }
 
-    /**
-     * @doesNotPerformAssertions
-     */
+    #[DoesNotPerformAssertions]
     public function testConstructorShouldRaiseErrorWhenPassedMultipleOptions()
     {
         $handler   = set_error_handler(array($this, 'errorHandler'), E_USER_NOTICE);

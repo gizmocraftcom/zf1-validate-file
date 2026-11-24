@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * MimeType testbed
@@ -29,8 +30,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Validate
  */
+#[Group('Zend_Validate')]
 class Zend_Validate_File_MimeTypeTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -171,9 +172,7 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }
 
-    /**
-     * @group ZF-9686
-     */
+    #[Group('ZF-9686')]
     public function testDualValidation()
     {
         $valuesExpected = array(
@@ -212,9 +211,7 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit\Framework\TestCase
         }
     }
 
-    /**
-     * @group ZF-11784
-     */
+    #[Group('ZF-11784')]
     public function testTryCommonMagicFilesFlag()
     {
         $validator = new Zend_Validate_File_MimeType('image/jpeg');
@@ -227,9 +224,7 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($validator->shouldTryCommonMagicFiles());
     }
 
-    /**
-     * @group ZF-11784
-     */
+    #[Group('ZF-11784')]
     public function testDisablingTryCommonMagicFilesIgnoresCommonLocations()
     {
         $filetest = dirname(__FILE__) . '/_files/picture.jpg';
